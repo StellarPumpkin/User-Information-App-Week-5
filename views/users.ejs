@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>AllUsers</title>
+    </head>
+
+    <body>
+        <h1>List of Humans</h1>
+        <ul>
+            <%if (users.length > 0) { %>
+                <% for(let user of users) { %>
+                <li>
+                    <%=user.firstname%>
+                    <%=user.lastname%>
+                    <%=user.email%>
+                </li>
+                <% } %>
+            <% } %>
+
+            <%if (users.length == 0) { %>
+                <h2>No Humans found</h2>
+            <% } %>
+        </ul>
+        <form action="/">
+            <input type="submit" value="Home" />
+        </form>
+
+        <form action="search">
+            <input type="submit" value="Humans' searcher" />
+        </form>
+
+        <form action="create">
+            <input type="submit" value="Humans' maker" />
+        </form>
+
+        <script src=""></script>
+    </body>
+
+</html>
