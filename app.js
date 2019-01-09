@@ -6,6 +6,8 @@ const fs = require('fs');
 const port = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set(express.static(path.join(__dirname, '/views')));
+//Path to public
+app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.urlencoded({
     extended: true
 }));
@@ -41,13 +43,31 @@ app.post('/search', (req, res) => {
                 result.push(currentUser);
             }
         });
-        console.log(result);
-
         res.render('users', {
             users: result
         })
     });
 });
+
+// ajax call
+app.post('/ajaxcall', (req, res) => {
+    let inputFromUser = req.body.name;
+    fs.readFile('./users.json', 'utf8', (err, data) => {
+        if (err) throw err;
+        let parsedData = JSON.parse(data);
+        let result = [];
+
+        parsedData.forEach((currentUser) => {
+            if (currentUser.firstname.toLowerCase().includes(inputFromUser) || currentUser.lastname.toLowerCase().includes(inputFromUser)) {
+                result.push(currentUser);
+            }
+        });
+        res.send(result)
+        
+    });
+    
+});
+
 
 /*- route 4: renders a page with three inputs on it (first name, last name, and email) that allows you 
 to add new users to the users.json file.*/
