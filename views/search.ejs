@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<form action='search' method='post' autocomplete='on'>
-    <input type="text" placeholder="Search.." name='search'>
+<form action='search' method='post' autocomplete='off'>
+    <input id ='searchId' type="text" placeholder="Search.." name='search'>
     <button type="submit"><i class="fa fa-search">press me</i></button>
+    <ul id='listOfNames'></ul>
     </form>
     <form action="/">
             <input type="submit" value="Home" />
@@ -20,7 +22,7 @@
         <form action="create">
     <input type="submit" value="Humans' maker" />
     </form>
-    <script src=""></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
     
 </body>
 </html>
