@@ -1,32 +1,28 @@
 $(document).ready(() => {
     //POST
-    $('#searchId').keyup(() => {
 
+    let start = Date.now();
+
+    $('#searchId').keyup(() => {
         let inputValue = $('#searchId').val().toLowerCase();
 
-        console.log('This is inputValue: ' + inputValue);
-    })
-})
-//POST
-$('#searchId').keyup(() => {
+        if ((Date.now() - start) > 300) {
+            //console.log('This is inputValue: ' + inputValue);
+            $.ajax({
+                type: 'POST',
+                url: '/ajaxcall',
+                data: {
+                    name: inputValue
+                },
+            }).done((response) => {
 
-    let inputValue = $('#searchId').val().toLowerCase();
+                $('#listOfNames').empty();
+                for (let i in response) {
+                    $('#listOfNames').append('<li>' + response[i].firstname + response[i].lastname + '</li>');
+                }
+            });
+            start = Date.now();
 
-    //console.log('This is inputValue: ' + inputValue);
-
-    $.ajax({
-
-        type: 'POST',
-        url: '/ajaxcall',
-        data: {
-            name: inputValue
-        },
-    }).done((response) => {
-
-        $('#listOfNames').empty();
-        for (let i in response) {
-
-            $('#listOfNames').append('<li>' + response[i].firstname + response[i].lastname + '</li>');
         }
-    });
+    })
 })
